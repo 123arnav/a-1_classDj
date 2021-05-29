@@ -39,6 +39,7 @@ function getposes(result){
         Rscore=result[0].pose.keypoints[10].score;
         console.log(Lscore);
         console.log(Rscore);
+        
         //score
     }
     //right
@@ -54,4 +55,18 @@ function stop(){
 
 function draw(){
 image(video, 0, 0, 600, 500)
+if (Lscore>0.2){
+    fill("purple")
+    circle(leftWristX,leftWristY,50);
+    volumeVal=Number(leftWristY);
+    volumeVal=floor(volumeVal);
+    volumeVal=volumeVal/500;
+    console.log(volumeVal);
+    song.setVolume(volumeVal);
+    document.getElementById("volume_value").innerHTML=volumeVal;
+    document.getElementById("instruct").innerHTML="NOTE:Move your left-hand wrist up and down for increasing and decreasing the volume move your right-hand wrist up and down for increasing and decreasing the speed";
+}
+if(Lscore<0.2){
+    document.getElementById("instruct").innerHTML="please keep a two feet distance and show your wrists to the camera";
+};
 };
